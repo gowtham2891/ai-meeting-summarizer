@@ -224,6 +224,28 @@ process, so a key placed in the environment would leak into other visitors'
 sessions. That property is pinned by a test that drives the real app and fails
 the build if a key ever reaches the process environment.
 
+### If a key is missing
+
+Pick a live provider without its key and the app says so before it runs
+anything, naming the variable, the provider that needs it, and where to get
+one — then opens the key panel for you. The run is blocked rather than
+failing part way through:
+
+```
+Add an API key to continue.
+- YouTube Data API key - needed for the 'youtube' data source
+  get one at console.cloud.google.com
+
+Open "Use your own API keys" in the sidebar and paste it there,
+or switch the provider back to `mock` to use the offline demo.
+```
+
+The CLI does the same and exits `1`:
+
+```bash
+$ meeting-summarizer check
+```
+
 From the terminal:
 
 ```bash

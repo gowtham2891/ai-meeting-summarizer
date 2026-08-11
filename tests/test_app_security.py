@@ -101,3 +101,43 @@ class TestApiKeyPanel:
 
         widget = _input_by_key(at, "user_key_openai_api_key")
         assert widget.value in ("", None)
+
+
+class TestCredentialPrompt:
+    """When a live provider has no key, the app must ask for one."""
+
+    def test_mock_mode_shows_no_warning(self):
+        at = AppTest.from_file(str(APP), default_timeout=90)
+        at.run()
+        assert not at.exception
+        warnings = " ".join(str(w.value) for w in at.warning)
+        assert "Add an API key" not in warnings
+
+    def test_selecting_a_live_provider_without_a_key_prompts(self, monkeypatch):
+        monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+        at = AppTest.from_file(str(APP), default_timeout=90)
+        at.run()
+
+        picker = next((s for s in at.selectbox if "openai" in (s.options or [])), None)
+        assert picker is not None, "no selectbox offering the live provider"
+        picker.set_value("openai").run()
+        assert not at.exception
+
+        shown = " ".join(str(e.value) for e in at.error) + \
+                " ".join(str(w.value) for w in at.warning)
+        assert "OPENAI_API_KEY" in shown or "Missing" in shown, (
+            "the app did not ask for the missing key"
+        )
+
+    def test_key_panel_opens_itself_when_a_key_is_needed(self, monkeypatch):
+        """The prompt is useless if the input it points at stays collapsed."""
+        monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+        at = AppTest.from_file(str(APP), default_timeout=90)
+        at.run()
+        picker = next((s for s in at.selectbox if "openai" in (s.options or [])), None)
+        picker.set_value("openai").run()
+
+        expanders = [e for e in at.get("expander")]
+        key_panel = next((e for e in expanders if "API keys" in str(e.proto.label)), None)
+        assert key_panel is not None, "key panel not found"
+        assert key_panel.proto.expanded, "key panel should open when a key is missing"

@@ -10,7 +10,13 @@ Importing this package registers every built-in provider, so
 from __future__ import annotations
 
 from .config import ConfigError, Settings, get_settings
-from .health import CheckResult, check_settings
+from .health import (
+    CheckResult,
+    MissingCredential,
+    check_settings,
+    credentials_ready,
+    missing_credentials,
+)
 from .models import (
     ActionItem,
     Decision,
@@ -35,15 +41,18 @@ __all__ = [
     "CheckResult",
     "ConfigError",
     "Decision",
-    "MeetingSummary",
     "MeetingSummarizerPipeline",
+    "MeetingSummary",
+    "MissingCredential",
     "PipelineResult",
     "Priority",
     "Settings",
     "Transcript",
     "TranscriptSegment",
     "check_settings",
+    "credentials_ready",
     "get_settings",
+    "missing_credentials",
     "summarize",
     "__version__",
 ]
