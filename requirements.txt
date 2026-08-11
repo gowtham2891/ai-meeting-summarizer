@@ -12,3 +12,6 @@ streamlit>=1.49
 # langchain-openai>=0.1
 # langchain-google-genai>=1.0
 # langchain-core>=0.2
+
+# Deployment note: Streamlit Community Cloud rebuilds the environment when
+# this file changes, which also forces a clean checkout of the repo.
