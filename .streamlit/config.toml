@@ -1,0 +1,8 @@
+# Only primaryColor is set: leaving the base palette unset keeps the app
+# adaptive, so it follows each visitor's light/dark preference instead of
+# forcing one look.
+[theme]
+primaryColor = "#2E6BE6"
+
+[browser]
+gatherUsageStats = false

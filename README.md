@@ -1,8 +1,11 @@
 # AI Meeting Summarizer Agent
 
+[![Live demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gowtham2891-meeting-summarizer.streamlit.app)
 [![CI](https://github.com/gowtham2891/ai-meeting-summarizer/actions/workflows/ci.yml/badge.svg)](https://github.com/gowtham2891/ai-meeting-summarizer/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+**▶ Try it live — [gowtham2891-meeting-summarizer.streamlit.app](https://gowtham2891-meeting-summarizer.streamlit.app)** · runs in mock mode, no credentials needed.
 
 An agentic pipeline that turns a meeting recording into a structured, actionable
 summary — and delivers it to WhatsApp, email, or disk before anyone has to ask
@@ -196,6 +199,39 @@ exit code. No network, no credentials.
 - [ ] Incremental summaries for recurring meetings (what changed since last time)
 - [ ] Slack and Notion delivery channels
 - [ ] Live streaming transcription instead of post-hoc file upload
+
+---
+
+## Deploy your own
+
+Ready for [Streamlit Community Cloud](https://share.streamlit.io): free, and it
+redeploys on every push to `main`.
+
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub.
+2. **Create app** → this repo, branch `main`, main file `app.py`.
+3. Under **Advanced settings**, choose Python **3.11**.
+4. Set the custom subdomain to `gowtham2891-meeting-summarizer` so it matches the link above.
+5. Deploy — the first build takes a couple of minutes.
+
+No secrets are needed for the demo. To switch it to the live providers, open
+**Settings → Secrets** in the Streamlit dashboard and paste:
+
+```toml
+TRANSCRIBER = "sarvam"
+EXTRACTOR = "openai"
+SARVAM_API_KEY = "your-sarvam-key"
+OPENAI_API_KEY = "your-openai-key"
+```
+
+`app.py` copies those secrets into the environment before settings are resolved,
+so the exact same configuration works locally through `.env` and in the cloud
+through the dashboard — no code changes either way.
+
+> **ffmpeg note.** Recordings longer than `CHUNK_SECONDS` are split with ffmpeg.
+> Streamlit Cloud images don't ship it, so add a `packages.txt` containing
+> `ffmpeg` if you need chunking in the cloud. It is left out by default because
+> it adds noticeably to cold-start time, and the code sends the file unchunked
+> when ffmpeg is absent rather than failing.
 
 ---
 
