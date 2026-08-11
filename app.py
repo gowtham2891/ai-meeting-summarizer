@@ -178,7 +178,7 @@ def sidebar_config():
 
         st.divider()
         if settings.is_mock:
-            st.success("Mock mode â no credentials required.")
+            st.success("Mock mode — no credentials required.")
         elif missing_credentials(settings):
             st.error(
                 "Missing: "
@@ -186,7 +186,7 @@ def sidebar_config():
                 + ". Add it above, or switch the provider back to `mock`."
             )
         else:
-            st.info("Live mode â using the keys provided.")
+            st.info("Live mode — using the keys provided.")
         if not ffmpeg_available():
             st.caption("⚠️ ffmpeg not found: long recordings won't be chunked.")
 
