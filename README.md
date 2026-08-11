@@ -1,11 +1,11 @@
 # AI Meeting Summarizer Agent
 
-[![Live demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://gowtham2891-meeting-summarizer.streamlit.app)
+[![Live demo](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-meeting-summarizerr.streamlit.app)
 [![CI](https://github.com/gowtham2891/ai-meeting-summarizer/actions/workflows/ci.yml/badge.svg)](https://github.com/gowtham2891/ai-meeting-summarizer/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**▶ Try it live — [gowtham2891-meeting-summarizer.streamlit.app](https://gowtham2891-meeting-summarizer.streamlit.app)** · runs in mock mode, no credentials needed — or paste your own API keys in the sidebar to drive the live providers.
+**▶ Try it live — [ai-meeting-summarizerr.streamlit.app](https://ai-meeting-summarizerr.streamlit.app)** · runs in mock mode, no credentials needed — or paste your own API keys in the sidebar to drive the live providers.
 
 An agentic pipeline that turns a meeting recording into a structured, actionable
 summary — and delivers it to WhatsApp, email, or disk before anyone has to ask
@@ -264,7 +264,7 @@ redeploys on every push to `main`.
 1. Sign in at [share.streamlit.io](https://share.streamlit.io) with GitHub.
 2. **Create app** → this repo, branch `main`, main file `app.py`.
 3. Under **Advanced settings**, choose Python **3.11**.
-4. Set the custom subdomain to `gowtham2891-meeting-summarizer` so it matches the link above.
+4. Set the custom subdomain to `ai-meeting-summarizerr` (this app's URL).
 5. Deploy — the first build takes a couple of minutes.
 
 No secrets are needed for the demo. To switch it to the live providers, open
