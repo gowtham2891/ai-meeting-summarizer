@@ -10,6 +10,7 @@ Importing this package registers every built-in provider, so
 from __future__ import annotations
 
 from .config import ConfigError, Settings, get_settings
+from .health import CheckResult, check_settings
 from .models import (
     ActionItem,
     Decision,
@@ -31,6 +32,7 @@ __version__ = "1.0.0"
 
 __all__ = [
     "ActionItem",
+    "CheckResult",
     "ConfigError",
     "Decision",
     "MeetingSummary",
@@ -40,6 +42,7 @@ __all__ = [
     "Settings",
     "Transcript",
     "TranscriptSegment",
+    "check_settings",
     "get_settings",
     "summarize",
     "__version__",

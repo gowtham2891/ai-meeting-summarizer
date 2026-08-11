@@ -21,6 +21,7 @@ from rich.table import Table
 from . import __version__
 from .audio import AudioError, ffmpeg_available
 from .config import ConfigError, get_settings
+from .health import check_settings
 from .delivery.base import available_channels
 from .extraction.base import available_extractors
 from .models import MeetingSummary
@@ -212,6 +213,33 @@ def providers() -> None:
     console.print(f"\n[dim]{settings.describe()}[/dim]")
     console.print(f"[dim]ffmpeg available: {ffmpeg_available()}[/dim]")
 
+
+@cli.command()
+def check() -> None:
+    """Verify the configured API keys actually work."""
+    settings = get_settings(refresh=True)
+    console.print(f"[dim]{settings.describe()}[/dim]")
+    console.print()
+
+    results = check_settings(settings)
+    if not results:
+        console.print("[yellow]Nothing to check for this configuration.[/yellow]")
+        return
+
+    for result in results:
+        icon = (
+            f"[green]{SYMBOLS['check']}[/green]"
+            if result.ok
+            else f"[red]{SYMBOLS['cross']}[/red]"
+        )
+        console.print(f"  {icon} [bold]{result.provider}[/bold]: {result.message}")
+
+    failed = [result for result in results if not result.ok]
+    console.print()
+    if failed:
+        console.print(f"[red]{len(failed)} check(s) failed.[/red]")
+        sys.exit(2)
+    console.print("[green]All checks passed.[/green]")
 
 @cli.command()
 @click.option("--output-dir", default="output", help="Where to write the summary.")
