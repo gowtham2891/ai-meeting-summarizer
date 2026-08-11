@@ -1,0 +1,14 @@
+# Core runtime
+pydantic>=2.5
+httpx>=0.25
+python-dotenv>=1.0
+click>=8.1
+rich>=13.0
+
+# Streamlit UI (app.py)
+streamlit>=1.49
+
+# Optional LLM providers -- uncomment the one you use
+# langchain-openai>=0.1
+# langchain-google-genai>=1.0
+# langchain-core>=0.2

@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-meeting-summarizer"
+version = "1.0.0"
+description = "Agentic pipeline that transcribes meetings, extracts decisions and action items, and delivers summaries to WhatsApp or email."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ganesh Gowtham Dupati", email = "gowthamdupati28@gmail.com" }]
+keywords = ["llm", "agents", "speech-to-text", "meeting-summary", "langchain", "sarvam"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "pydantic>=2.5",
+    "httpx>=0.25",
+    "python-dotenv>=1.0",
+    "click>=8.1",
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit>=1.49"]
+openai = ["langchain-openai>=0.1", "langchain-core>=0.2"]
+gemini = ["langchain-google-genai>=1.0", "langchain-core>=0.2"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+all = [
+    "streamlit>=1.49",
+    "langchain-openai>=0.1",
+    "langchain-google-genai>=1.0",
+    "langchain-core>=0.2",
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/gowtham2891/ai-meeting-summarizer"
+Repository = "https://github.com/gowtham2891/ai-meeting-summarizer"
+Issues = "https://github.com/gowtham2891/ai-meeting-summarizer/issues"
+
+[project.scripts]
+meeting-summarizer = "meeting_summarizer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["meeting_summarizer*"]
+
+[tool.setuptools.package-data]
+meeting_summarizer = ["data/*.wav"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+filterwarnings = ["ignore::DeprecationWarning"]
